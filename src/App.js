@@ -1,42 +1,42 @@
-import React, { Component } from "react";
-import Button from "./button";
+import React, { Component } from 'react';
+import './App.css'
+import {Button} from './Button';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
-export default class App extends Component {
-  constructor() {
-    super();
+
+
+class App extends Component {
+
+  constructor(props) {
+    super(props);
     this.state = {
-      count: 0
-    };
+      count: 0,
+        zero: 'Zero'
+    }
+
   }
 
-  incrementCount = () => {
-    this.setState({
-      count: this.state.count + 1
-    });
-  };
-
-  decrementCount = () => {
-    this.setState({
-      count: this.state.count - 1
-    });
-  };
+  handleCount(value) {
+    this.setState((prevState) => ({ count: prevState.count + value }));
+  }
 
   render() {
-    let { count } = this.state;
+
+
     return (
-        <div className="app">
-          <div>
-            <div class="count">
-              <h3>Count:</h3>
-              <h1>{count}</h1>
-            </div>
-            <div class="buttons">
-              <Button title={"-"} action={this.decrementCount} />
-              <Button title={"+"} action={this.incrementCount} />
-            </div>
-          </div>
+
+        <div className={"d-flex justify-content-center;d-flex align-items-center; "}>
+
+            <Button  sign="-" count={this.state.count} updateCount={this.handleCount.bind(this)} />
+            <h1><center>{this.state.count===0?this.state.zero:this.state.count}</center></h1>
+          <hr />
+
+          <Button sign="+"  count={this.state.count} updateCount={this.handleCount.bind(this)} />
+
         </div>
     );
   }
 }
+
+export default App;
